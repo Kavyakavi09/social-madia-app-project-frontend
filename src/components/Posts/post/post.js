@@ -3,7 +3,7 @@ import useStyles from './styles';
 
 function Post() {
   const classes = useStyles();
-  return <div>post</div>;
+  return <h1>Post</h1>;
 }
 
 export default Post;

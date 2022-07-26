@@ -2,6 +2,7 @@
   "name": "social-madia-app-project-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4003",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.9.1",

@@ -4,7 +4,7 @@ import useStyles from './Styles';
 
 function Form() {
   const classes = useStyles();
-  return <div>Form</div>;
+  return <h1>Form</h1>;
 }
 
 export default Form;
