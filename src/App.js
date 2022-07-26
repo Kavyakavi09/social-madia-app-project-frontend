@@ -1,6 +1,8 @@
 import './App.css';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import memories from './images/memories.png';
+import Posts from './components/Posts/posts';
+import Form from './components/Form/Form';
 
 function App() {
   return (
@@ -9,8 +11,24 @@ function App() {
         <Typography variant='h2' align='center'>
           Social Media App
         </Typography>
-        <img src={memories} alt='memories' height={'60'} />
+        <img src={memories} alt='memories' height='100' width={'100'} />
       </AppBar>
+      <Grow in>
+        <Container>
+          <Grid
+            container
+            justifyContent='space-between'
+            alignItems='stretch'
+            spacing={3}>
+            <Grid item xs={12} sm={7}>
+              <Posts />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Form />
+            </Grid>
+          </Grid>
+        </Container>
+      </Grow>
     </Container>
   );
 }
