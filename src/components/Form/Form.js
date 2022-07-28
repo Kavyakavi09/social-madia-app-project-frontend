@@ -26,7 +26,7 @@ function Form({ currentId, setCurrentId }) {
   }, [post]);
 
   const clear = () => {
-    // setCurrentId(0);
+    setCurrentId(0);
     setPostData({
       creator: '',
       title: '',
@@ -39,13 +39,13 @@ function Form({ currentId, setCurrentId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (currentId === 0) {
-    dispatch(createPost(postData));
-    clear();
-    // } else {
-    // dispatch(updatePost(currentId, postData));
-    // clear();
-    // }
+    if (currentId === 0) {
+      dispatch(createPost(postData));
+      clear();
+    } else {
+      dispatch(updatePost(currentId, postData));
+      clear();
+    }
   };
   return (
     <Paper className={classes.paper}>
