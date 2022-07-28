@@ -81,7 +81,7 @@ function Form({ currentId, setCurrentId }) {
           label='Message'
           fullWidth
           multiline
-          minRows={4}
+          minRows={2}
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })

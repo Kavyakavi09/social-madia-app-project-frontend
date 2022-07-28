@@ -21,8 +21,11 @@ function App() {
   return (
     <Container maxWidth={'lg'}>
       <AppBar className={classes.appBar} position='static' color='inherit'>
-        <Typography className={classes.heading} variant='h3' align='center'>
-          Social Media App
+        <Typography
+          className={`${classes.heading} ${classes.mainHeading}`}
+          variant='h3'
+          align='center'>
+          Posty Fire
         </Typography>
         <img
           className={classes.image}
@@ -37,7 +40,8 @@ function App() {
             container
             justifyContent='space-between'
             alignItems='stretch'
-            spacing={3}>
+            spacing={3}
+            className={classes.mainContainer}>
             <Grid item xs={12} sm={7}>
               <Posts setCurrentId={setCurrentId} />
             </Grid>
