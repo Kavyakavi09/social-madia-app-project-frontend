@@ -1,9 +1,8 @@
 import './App.css';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { Container, Grow, Grid } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/post';
-import memories from './images/memories.png';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './Styles';
@@ -20,20 +19,6 @@ function App() {
 
   return (
     <Container maxWidth={'lg'}>
-      <AppBar className={classes.appBar} position='static' color='inherit'>
-        <Typography
-          className={`${classes.heading} ${classes.mainHeading}`}
-          variant='h3'
-          align='center'>
-          Posty Fire
-        </Typography>
-        <img
-          className={classes.image}
-          src={memories}
-          alt='memories'
-          height='50'
-        />
-      </AppBar>
       <Grow in>
         <Container>
           <Grid
