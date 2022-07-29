@@ -42,6 +42,23 @@ function Auth() {
 
   const handleChange = () => {};
 
+  const googleSuccess = async (res) => {
+    const result = res?.clientId;
+    const token = res?.credential;
+
+    console.log(res);
+
+    try {
+      // dispatch({ type: AUTH, data: { result, token } });
+      // history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleError = () =>
+    alert('Google Sign In was unsuccessful. Try again later');
+
   return (
     <Container component='main' maxWidth='xs'>
       <Paper className={classes.paper} elevation={3}>
@@ -96,29 +113,21 @@ function Auth() {
             type='submit'
             fullWidth
             variant='contained'
-            color='primary'
             className={classes.submit}>
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
-          <GoogleLogin
-            clientId='978678527656-j3hbepf06ak2nc1qemjppc0m84p8k2is.apps.googleusercontent.com'
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color='primary'
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant='contained'>
-                Google Sign In
-              </Button>
-            )}
-            // onSuccess={googleSuccess}
-            // onFailure={googleError}
-            cookiePolicy='single_host_origin'
-          />
-          <Grid container justify='flex-end'>
+          <Button className={classes.googleButton}>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_Auth_Google_ID}
+              onSuccess={googleSuccess}
+              onError={googleError}
+              cookiePolicy='single_host_origin'
+              theme='filled_blue'
+              size='large'
+              width='370'
+            />
+          </Button>
+          <Grid container justifyContent='flex-end'>
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignup
