@@ -11,10 +11,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import Input from './Input';
 import { GoogleLogin } from '@react-oauth/google';
-
-import Icon from './Icon';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { AUTH } from '../../constants/actionTypes';
 
 function Auth() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const initialState = {
     firstName: '',
     lastName: '',
@@ -45,12 +48,10 @@ function Auth() {
   const googleSuccess = async (res) => {
     const result = res?.clientId;
     const token = res?.credential;
-
     console.log(res);
-
     try {
-      // dispatch({ type: AUTH, data: { result, token } });
-      // history.push('/');
+      dispatch({ type: AUTH, data: { result, token } });
+      history.push('/');
     } catch (error) {
       console.log(error);
     }
