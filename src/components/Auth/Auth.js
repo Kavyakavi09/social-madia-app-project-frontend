@@ -14,6 +14,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AUTH } from '../../constants/actionTypes';
+import { signin, signup } from '../../actions/auth';
 
 function Auth() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Auth() {
     confirmPassword: '',
   };
 
-  const [form, setForm] = useState(initialState);
+  const [formData, setFormData] = useState(initialState);
   const classes = useStyles();
 
   const [isSignup, setIsSignup] = useState(false);
@@ -36,14 +37,23 @@ function Auth() {
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   const switchMode = () => {
-    setForm(initialState);
+    setFormData(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleSuccess = async (res) => {
     const result = res?.clientId;
