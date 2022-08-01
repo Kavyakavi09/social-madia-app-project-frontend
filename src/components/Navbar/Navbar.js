@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import jwt_decode from 'jwt-decode';
 
 import memories from '../../images/memories.png';
 import { LOGOUT } from '../../constants/actionTypes';
@@ -29,13 +28,11 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = user?.token;
-    // const decodedToken = jwt_decode(token);
-    // if (token) {
-    //   if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-    // }
 
+    // if (token) {
+    //   if (user?.decodedToken.exp * 1000 < new Date().getTime()) logout();
+    // }
     setUser(JSON.parse(localStorage.getItem('profile')));
-    // return decodedToken;
   }, [location]);
 
   return (
@@ -54,15 +51,15 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar}>
         {user?.token ? (
           <div className={classes.profile}>
-            {/* <Avatar
+            <Avatar
               className={classes.purple}
-              alt={decodedToken.given_name}
-              src={decodedToken.picture}>
-              {decodedToken.given_name.charAt(0)}
+              alt={user?.decodedToken?.name || user?.user?.name}
+              src={user?.decodedToken?.picture}>
+              {user?.user?.name?.charAt(0)}
             </Avatar>
             <Typography className={classes.userName} variant='h6'>
-              {decodedToken.name}
-            </Typography> */}
+              {user?.decodedToken?.name} {user?.user?.name}
+            </Typography>
             <Button
               variant='contained'
               className={classes.logout}

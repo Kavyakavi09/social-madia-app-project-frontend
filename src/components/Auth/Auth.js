@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AUTH } from '../../constants/actionTypes';
 import { signin, signup } from '../../actions/auth';
+import jwt_decode from 'jwt-decode';
 
 function Auth() {
   const dispatch = useDispatch();
@@ -58,9 +59,10 @@ function Auth() {
   const googleSuccess = async (res) => {
     const result = res?.clientId;
     const token = res?.credential;
-    console.log(res);
+    const decodedToken = jwt_decode(token);
+
     try {
-      dispatch({ type: AUTH, data: { result, token } });
+      dispatch({ type: AUTH, data: { result, token, decodedToken } });
       history.push('/');
     } catch (error) {
       console.log(error);
