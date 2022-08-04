@@ -17,7 +17,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import useStyles from './styles';
 
-import { getPosts } from '../../actions/post';
+import { getPosts, getPostsBySearch } from '../../actions/post';
 import Pagination from '../Pagination';
 
 function useQuery() {
@@ -41,6 +41,7 @@ function Home() {
 
   const searchPost = () => {
     if (search.trim()) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
     } else {
       history.push('/');
     }
