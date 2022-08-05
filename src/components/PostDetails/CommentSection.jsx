@@ -13,16 +13,15 @@ const CommentSection = ({ post }) => {
   const classes = useStyles();
   const commentsRef = useRef();
 
-  const handleComment = () => {
-    const newComments = dispatch(
+  const handleComment = async () => {
+    const newComments = await dispatch(
       commentPost(
         `${user?.user?.name || user?.decodedToken?.name}: ${comment}`,
         post._id
       )
     );
-
-    setComment('');
     setComments(newComments);
+    setComment('');
 
     commentsRef.current.scrollIntoView({ behavior: 'smooth' });
   };
@@ -42,30 +41,33 @@ const CommentSection = ({ post }) => {
           ))}
           <div ref={commentsRef} />
         </div>
-        <div style={{ width: '70%' }}>
-          <Typography gutterBottom variant='h6'>
-            Write a comment
-          </Typography>
-          <TextField
-            fullWidth
-            rows={4}
-            variant='outlined'
-            label='Comment'
-            multiline
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <br />
-          <Button
-            style={{ marginTop: '10px' }}
-            fullWidth
-            disabled={!comment.length}
-            color='primary'
-            variant='contained'
-            onClick={handleComment}>
-            Comment
-          </Button>
-        </div>
+
+        {(user?.user?.name || user?.decodedToken?.name) && (
+          <div style={{ width: '70%' }}>
+            <Typography gutterBottom variant='h6'>
+              Write a comment
+            </Typography>
+            <TextField
+              fullWidth
+              minRows={4}
+              variant='outlined'
+              label='Comment'
+              multiline
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <br />
+            <Button
+              style={{ marginTop: '10px' }}
+              fullWidth
+              disabled={!comment.length}
+              color='primary'
+              variant='contained'
+              onClick={handleComment}>
+              Comment
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

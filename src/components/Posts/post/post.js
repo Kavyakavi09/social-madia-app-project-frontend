@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardActions,
@@ -24,26 +24,35 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
+  const [likes, setLikes] = useState(post?.likeCount);
+
+  const userId = user?.decodedToken?.sub || user?.user?._id;
+  const hasLikedPost = post.likeCount.find((like) => like === userId);
+
+  const handleLike = () => {
+    dispatch(likePost(post._id));
+
+    if (hasLikedPost) {
+      setLikes(post?.likeCount.filter((id) => id !== userId));
+    } else {
+      setLikes([...post.likeCount, userId]);
+    }
+  };
 
   const Likes = () => {
-    if (post.likeCount.length > 0) {
-      return post.likeCount.find(
-        (like) => like === (user?.decodedToken?.sub || user?.user?._id)
-      ) ? (
+    if (likes.length > 0) {
+      return likes.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize='small' />
           &nbsp;
-          {post.likeCount.length > 2
-            ? `You and ${post.likeCount.length - 1} others`
-            : `${post.likeCount.length} like${
-                post.likeCount.length > 1 ? 's' : ''
-              }`}
+          {likes.length > 2
+            ? `You and ${likes.length - 1} others`
+            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
         </>
       ) : (
         <>
           <ThumbUpAltOutlined fontSize='small' />
-          &nbsp;{post.likeCount.length}{' '}
-          {post.likeCount.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
         </>
       );
     }
@@ -113,7 +122,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size='small'
           color='primary'
-          onClick={() => dispatch(likePost(post._id))}
+          onClick={handleLike}
           disabled={!user?.token}>
           <Likes />
         </Button>

@@ -8,8 +8,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
-  const user = JSON.parse(localStorage.getItem('profile'));
-
   return (
     <GoogleOAuthProvider clientId={`${process.env.REACT_APP_Auth_Google_ID}`}>
       <BrowserRouter>
@@ -24,11 +22,7 @@ function App() {
             <Route path={'/posts'} exact component={Home} />
             <Route path={'/posts/search'} exact component={Home} />
             <Route path={'/posts/:id'} exact component={PostDetails} />
-            <Route
-              path='/auth'
-              exact
-              component={() => (!user ? <Auth /> : <Redirect to={'/posts'} />)}
-            />
+            <Route path='/auth' exact component={Auth} />
           </Switch>
         </Container>
       </BrowserRouter>
