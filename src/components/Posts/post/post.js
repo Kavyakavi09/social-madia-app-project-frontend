@@ -27,7 +27,7 @@ const Post = ({ post, setCurrentId }) => {
   const [likes, setLikes] = useState(post?.likeCount);
 
   const userId = user?.decodedToken?.sub || user?.user?._id;
-  const hasLikedPost = post.likeCount.find((like) => like === userId);
+  const hasLikedPost = post?.likeCount?.find((like) => like === userId);
 
   const handleLike = () => {
     dispatch(likePost(post._id));
@@ -90,11 +90,14 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         {(user?.decodedToken?.sub === post.creator ||
           user?.user?._id === post.creator) && (
-          <div className={classes.overlay2}>
+          <div className={classes.overlay2} name='edit'>
             <Button
               style={{ color: 'white' }}
               size='small'
-              onClick={() => setCurrentId(post._id)}>
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentId(post._id);
+              }}>
               <MoreHorizIcon fontSize='medium' />
             </Button>
           </div>
@@ -114,7 +117,7 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
         <CardContent>
           <Typography variant='body2' color='textSecondary' component='p'>
-            {post.message}
+            {post.message.split(' ').splice(0, 20).join(' ')}...
           </Typography>
         </CardContent>
       </ButtonBase>
@@ -130,7 +133,7 @@ const Post = ({ post, setCurrentId }) => {
           user?.user?._id === post.creator) && (
           <Button
             size='small'
-            color='primary'
+            color='secondary'
             onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize='small' /> Delete
           </Button>

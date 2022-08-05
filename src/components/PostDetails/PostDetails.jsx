@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import CommentSection from './CommentSection';
 import { getPost, getPostsBySearch } from '../../actions/post';
 import useStyles from './styles';
@@ -22,7 +22,7 @@ const Post = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (post) {
@@ -30,7 +30,7 @@ const Post = () => {
         getPostsBySearch({ search: 'none', tags: post?.tags.join(',') })
       );
     }
-  }, [post]);
+  }, [dispatch, post]);
 
   if (!post) return null;
 
@@ -58,12 +58,25 @@ const Post = () => {
             variant='h6'
             color='textSecondary'
             component='h2'>
-            {post.tags.map((tag) => `#${tag} `)}
+            {post.tags.map((tag) => (
+              <Link
+                to={`/tags/${tag}`}
+                style={{ textDecoration: 'none', color: '#3f51b5' }}>
+                {` #${tag} `}
+              </Link>
+            ))}
           </Typography>
           <Typography gutterBottom variant='body1' component='p'>
             {post.message}
           </Typography>
-          <Typography variant='h6'>Created by: {post.name}</Typography>
+          <Typography variant='h6'>
+            Created by:{' '}
+            <Link
+              to={`/creators/${post.name}`}
+              style={{ textDecoration: 'none', color: '#3f51b5' }}>
+              {` ${post.name}`}
+            </Link>
+          </Typography>
           <Typography variant='body1'>
             {moment(post.createdAt).fromNow()}
           </Typography>
