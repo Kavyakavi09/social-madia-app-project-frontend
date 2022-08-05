@@ -5,6 +5,7 @@ import useStyles from './Styles';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { createPost, updatePost } from '../../actions/post';
+import { useHistory } from 'react-router-dom';
 
 function Form({ currentId, setCurrentId }) {
   const classes = useStyles();
@@ -22,6 +23,7 @@ function Form({ currentId, setCurrentId }) {
       : null
   );
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -42,10 +44,13 @@ function Form({ currentId, setCurrentId }) {
 
     if (currentId === 0) {
       dispatch(
-        createPost({
-          ...postData,
-          name: user?.user?.name || user?.decodedToken?.name,
-        })
+        createPost(
+          {
+            ...postData,
+            name: user?.user?.name || user?.decodedToken?.name,
+          },
+          history
+        )
       );
 
       clear();

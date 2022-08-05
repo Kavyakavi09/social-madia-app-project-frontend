@@ -26,6 +26,9 @@ export const fetchPostsBySearch = (searchQuery) =>
 
 export const createPost = (newPost) => API.post(`/posts/create`, newPost);
 
+export const comment = (value, id) =>
+  API.post(`/posts/${id}/commentPost`, { value });
+
 export const updatePost = (id, updatedPost) =>
   API.put(`/posts/${id}`, updatedPost);
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Container,
   Grow,

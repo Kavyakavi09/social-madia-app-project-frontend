@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect } from 'react';
 import {
   Paper,
@@ -8,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
-
+import CommentSection from './CommentSection';
 import { getPost, getPostsBySearch } from '../../actions/post';
 import useStyles from './styles';
 
@@ -23,13 +24,13 @@ const Post = () => {
     dispatch(getPost(id));
   }, [id]);
 
-  // useEffect(() => {
-  //   if (post) {
-  //     dispatch(
-  //       getPostsBySearch({ search: 'none', tags: post?.tags.join(',') })
-  //     );
-  //   }
-  // }, [post]);
+  useEffect(() => {
+    if (post) {
+      dispatch(
+        getPostsBySearch({ search: 'none', tags: post?.tags.join(',') })
+      );
+    }
+  }, [post]);
 
   if (!post) return null;
 
@@ -71,9 +72,7 @@ const Post = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant='body1'>
-            <strong>Comments - coming soon!</strong>
-          </Typography>
+          <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
@@ -87,7 +86,7 @@ const Post = () => {
           />
         </div>
       </div>
-      {recommendedPosts.length && (
+      {recommendedPosts.length ? (
         <div className={classes.section}>
           <Typography gutterBottom variant='h5'>
             You might also like:
@@ -118,7 +117,7 @@ const Post = () => {
             )}
           </div>
         </div>
-      )}
+      ) : null}
     </Paper>
   );
 };
