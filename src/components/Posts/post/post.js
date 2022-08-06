@@ -40,19 +40,19 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const Likes = () => {
-    if (likes.length > 0) {
-      return likes.find((like) => like === userId) ? (
+    if (likes?.length > 0) {
+      return likes?.find((like) => like === userId) ? (
         <>
           <ThumbUpAltIcon fontSize='small' />
           &nbsp;
-          {likes.length > 2
-            ? `You and ${likes.length - 1} others`
-            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
+          {likes?.length > 2
+            ? `You and ${likes?.length - 1} others`
+            : `${likes?.length} like${likes?.length > 1 ? 's' : ''}`}
         </>
       ) : (
         <>
           <ThumbUpAltOutlined fontSize='small' />
-          &nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{likes?.length} {likes?.length === 1 ? 'Like' : 'Likes'}
         </>
       );
     }
@@ -83,7 +83,9 @@ const Post = ({ post, setCurrentId }) => {
           title={post.title}
         />
         <div className={classes.overlay}>
-          <Typography variant='h6'>{post.name}</Typography>
+          <Typography variant='h6'>
+            {post?.name || user?.user?.name || user?.decodedToken?.name}
+          </Typography>
           <Typography variant='body2'>
             {moment(post.createdAt).fromNow()}
           </Typography>

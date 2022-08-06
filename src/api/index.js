@@ -17,6 +17,9 @@ export const fetchPost = (id) => API.get(`/posts/${id}`);
 
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
 
+export const fetchPostsByCreator = (name) =>
+  API.get(`/posts/creator?name=${name}`);
+
 export const fetchPostsBySearch = (searchQuery) =>
   API.get(
     `/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${

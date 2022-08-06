@@ -73,7 +73,7 @@ function Auth() {
     console.log('Google Sign In was unsuccessful. Try again later');
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' className={classes.margin}>
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -138,6 +138,7 @@ function Auth() {
               theme='filled_blue'
               size='large'
               width='370'
+              text={isSignup ? 'signup_with' : 'signin_with'}
             />
           </Button>
           <Grid container justifyContent='flex-end'>

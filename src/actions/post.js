@@ -10,6 +10,7 @@ import {
   END_LOADING,
   FETCH_POST,
   COMMENT,
+  FETCH_BY_CREATOR,
 } from '../constants/actionTypes';
 
 // Action creators
@@ -33,6 +34,20 @@ export const getPosts = (page) => async (dispatch) => {
     const { data } = await api.fetchPosts(page);
 
     dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsByCreator = (name) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const {
+      data: { data },
+    } = await api.fetchPostsByCreator(name);
+
+    dispatch({ type: FETCH_BY_CREATOR, payload: data });
     dispatch({ type: END_LOADING });
   } catch (error) {
     console.log(error);

@@ -34,4 +34,7 @@ export default makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     width: '100%',
   },
+  margin: {
+    marginBottom: theme.spacing(5),
+  },
 }));

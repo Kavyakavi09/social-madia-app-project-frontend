@@ -41,6 +41,8 @@ function Home() {
       history.push(
         `/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`
       );
+      setSearch('');
+      setTags([]);
     } else {
       history.push('/');
     }
