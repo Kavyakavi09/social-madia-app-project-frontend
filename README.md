@@ -1,15 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+###live site
 
-### `npm start`
+<a href="https://ibb.co/CnJ5bg1"><img src="https://i.ibb.co/2j87vxn/memories.png" alt="memories" border="0"></a><br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
