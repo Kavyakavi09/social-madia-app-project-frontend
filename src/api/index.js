@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://social-media-app-memories.herokuapp.com/api/';
+const url = 'https://social-media-app-xham.onrender.com/api/';
 
 const API = axios.create({ baseURL: url });
 
